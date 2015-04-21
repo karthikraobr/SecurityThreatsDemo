@@ -15,6 +15,8 @@ namespace MvcMusicStore.Controllers
         public ActionResult Index()
         {
             // Get most popular albums
+            //Insert data to database
+            System.Data.Entity.Database.SetInitializer(new MvcMusicStore.Models.SampleData());
             var albums = GetTopSellingAlbums(5);
 
             return View(albums);

@@ -1,4 +1,7 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
+
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace MvcMusicStore.Models
 {
@@ -10,5 +13,12 @@ namespace MvcMusicStore.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+        }
     }
 }
