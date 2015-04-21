@@ -39,3 +39,4 @@ C:\Users\kaarthikrao.br\Documents\SecurityThreats\MvcMusicStore-Completed\MvcMus
 C:\Users\kaarthikrao.br\Documents\SecurityThreats\MvcMusicStore-Completed\MvcMusicStore\bin\System.Web.WebPages.Razor.xml
 C:\Users\kaarthikrao.br\Documents\SecurityThreats\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.dll
 C:\Users\kaarthikrao.br\Documents\SecurityThreats\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.pdb
+C:\Users\kaarthikrao.br\Documents\SecurityThreats\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.csprojResolveAssemblyReference.cache
