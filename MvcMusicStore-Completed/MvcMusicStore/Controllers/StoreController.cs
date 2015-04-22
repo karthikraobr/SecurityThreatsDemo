@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,13 +59,34 @@ namespace MvcMusicStore.Controllers
         //
         // GET: /Store/Details/5
 
-        public ActionResult Search(string  searchStr)
+        public ActionResult Search(string searchStr)
         {
-            //var Albums = storeDB.Albums.Find(n => n.Title.Contains(searchStr));
-            var Albums = from s in storeDB.Albums
-                where s.Title.Contains(searchStr)
-                select s;
-            ViewBag.Albums = Albums.ToList();
+            DataTable dt = new DataTable();
+            string connString = storeDB.Database.Connection.ConnectionString;
+            string query = string.Format("select * from [Album] where Title like '%{0}'", searchStr);
+            //string query = "select * from [Album] where Title = 'Live' OR 1=1";
+            try
+            {
+
+                using (SqlConnection con = new SqlConnection(connString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            //var Albums = from s in storeDB.Albums
+            //             where s.Title.Contains(searchStr)
+            //             select s;
+            //ViewBag.Albums = Albums.ToList();
+            ViewBag.Data = dt;
             return View();
         }
     }
