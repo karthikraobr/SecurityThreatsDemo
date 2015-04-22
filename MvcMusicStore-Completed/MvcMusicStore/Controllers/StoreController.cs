@@ -54,5 +54,17 @@ namespace MvcMusicStore.Controllers
             return PartialView(genres);
         }
 
+        //
+        // GET: /Store/Details/5
+
+        public ActionResult Search(string  searchStr)
+        {
+            //var Albums = storeDB.Albums.Find(n => n.Title.Contains(searchStr));
+            var Albums = from s in storeDB.Albums
+                where s.Title.Contains(searchStr)
+                select s;
+            ViewBag.Albums = Albums.ToList();
+            return View();
+        }
     }
 }
