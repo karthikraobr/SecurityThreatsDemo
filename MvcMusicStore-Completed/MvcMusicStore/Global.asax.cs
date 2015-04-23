@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,12 +32,29 @@ namespace MvcMusicStore
 
         protected void Application_Start()
         {
-            
+
 
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
+
+        //protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+        //{
+        //    // Remove the "Server" HTTP Header from response
+        //    var app = sender as HttpApplication;
+        //    if (null != app && null != app.Context && null != app.Context.Response)
+        //    {
+        //        NameValueCollection headers = app.Context.Response.Headers;
+        //        if (null != headers)
+        //        {
+        //            headers.Remove("Server");
+        //            headers.Remove("X-AspNet-Version");
+        //            headers.Remove("X-AspNetMvc-Version");
+        //            headers.Remove("X-Powered-By");
+        //        }
+        //    }
+        //}
     }
 }
