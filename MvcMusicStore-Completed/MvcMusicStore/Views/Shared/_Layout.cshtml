@@ -27,6 +27,7 @@
                     <li><a href="@Url.Content("~/Store/")">Store</a></li>
                     <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                     <li><a href="@Url.Content("~/StoreManager/")">Admin</a></li>
+                   
                 </ul>
             </div>
             <div id="search">
@@ -35,6 +36,10 @@
                     <input type="submit" value="Search" />
                 </form>
             </div>
+            @if (User.Identity.Name != "")
+            {
+                <h3 style="float: right">Welcome : @User.Identity.Name</h3>
+            }
         </div>
     </div>
 
