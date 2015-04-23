@@ -38,10 +38,21 @@ namespace MvcMusicStore.Controllers
         //
         // GET: /Store/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            var album = storeDB.Albums.Find(id);
-
+            TempData["exeption"] = "";
+            int id1=1;
+            try
+            {
+                id1 = Int32.Parse(id);
+            }
+            
+            catch(System.Exception e)
+            {
+                TempData["exeption"]=e.StackTrace.ToString();
+                
+            }
+            var album = storeDB.Albums.Find(id1);
             return View(album);
         }
 

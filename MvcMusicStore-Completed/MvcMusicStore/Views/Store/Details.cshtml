@@ -4,27 +4,39 @@
     ViewBag.Title = "Album - " + Model.Title;
 }
 
-<h2>@Model.Title</h2>
 
-<p>
-    <img alt="@Model.Title" src="@Model.AlbumArtUrl" />
-</p>
+@if (TempData["exeption"] != null && TempData["exeption"] != "")
+{
+    <h2>Error while retriving the data</h2>
+    <div id="album-details">
+        <p style="width:800px"> @TempData["exeption"] as string</p>
+    </div>
+}
+else
+{
+    <h2>@Model.Title</h2>
+    <p>
+        <img alt="@Model.Title" src="@Model.AlbumArtUrl" />
+    </p>
 
-<div id="album-details">
-    <p>
-        <em>Genre:</em>
-        @Model.Genre.Name
-    </p>
-    <p>
-        <em>Artist:</em>
-        @Model.Artist.Name
-    </p>
-    <p>
-        <em>Price:</em>
-        @String.Format("{0:F}", Model.Price)
-    </p>
-    <p class="button">
-        @Html.ActionLink("Add to cart", "AddToCart", 
+    <div id="album-details">
+
+        <p>
+            <em>Genre:</em>
+            @Model.Genre.Name
+        </p>
+        <p>
+            <em>Artist:</em>
+            @Model.Artist.Name
+        </p>
+        <p>
+            <em>Price:</em>
+            @String.Format("{0:F}", Model.Price)
+        </p>
+        <p class="button">
+            @Html.ActionLink("Add to cart", "AddToCart",
         "ShoppingCart", new { id = Model.AlbumId }, "")
-    </p>
-</div>
+        </p>
+
+    </div>
+}
