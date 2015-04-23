@@ -253,6 +253,9 @@
   <ItemGroup>
     <Content Include="Views\Store\Search.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\UserData.csv" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
