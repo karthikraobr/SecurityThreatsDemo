@@ -35,8 +35,70 @@ else
         </p>
         <p class="button">
             @Html.ActionLink("Add to cart", "AddToCart",
-        "ShoppingCart", new { id = Model.AlbumId }, "")
+                "ShoppingCart", new { id = Model.AlbumId }, "")
         </p>
+        <p class="button">
+            <a href="#" id="btnWriteRev">Write Review</a>
+        </p>
+    </div>
+
+
+    <div id="result"></div>
+    <div id="reviewForm" style="display: none">
+        <fieldset>
+            <legend>Write your review</legend>
+
+            Description : <textarea id="textDesc" style="border-bottom-color: black"></textarea>
+            <br />
+            <input type="button" id="btnSubRev" value="Submit" class="button" style="" />
+        </fieldset>
+    </div>
+    <div class="">
+        @if (Model.AlbumReviews.Count > 0)
+        {
+            <br /><br />
+            <h2 style="text-decoration: underline">Album reviews</h2>
+            <ul>
+                @foreach (var review in Model.AlbumReviews)
+                {
+                    <li>@Html.Raw(review.Description)</li>
+                }
+            </ul>
+        }
 
     </div>
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#reviewForm").hide();
+        $("#btnWriteRev").click(function() {
+            $("#reviewForm").show();
+        });
+
+        $("#btnSubRev").click(function (e) {
+            var id =@Model.AlbumId;
+            var desc = $("#textDesc").val();
+            if (desc == "") {
+                alert("Description is required");
+                e.preventDefault();
+                return 0;
+            }
+            var data = {"AlbumId":id,"Description":desc}
+            var url = '@Url.Action("SubmitReview","Store")';
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                success: function (retdata) {
+                    //$('#result').html(retdata.msg);
+                    window.location = '@Url.Action("Details","Store",new {id =Model.AlbumId})';
+                },
+                data: data,
+                error: function (request, status, error) {
+                    $('#result').html(request.responseText);
+                }
+            });
+        });
+    });
+</script>
+

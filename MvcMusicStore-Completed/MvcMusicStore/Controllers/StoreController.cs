@@ -56,6 +56,14 @@ namespace MvcMusicStore.Controllers
             return View(album);
         }
 
+        //Save Review details
+        public ActionResult SubmitReview(AlbumReview review)
+        {
+            storeDB.AlbumReview.Add(review);
+            storeDB.SaveChanges();
+            return new EmptyResult();
+        }
+
         //
         // GET: /Store/GenreMenu
 
