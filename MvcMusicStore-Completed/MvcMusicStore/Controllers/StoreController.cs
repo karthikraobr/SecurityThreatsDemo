@@ -53,6 +53,9 @@ namespace MvcMusicStore.Controllers
                 
             }
             var album = storeDB.Albums.Find(id1);
+            string name = "";
+            if(id1==0)
+                name = storeDB.Albums.Find(id1).Title;
             return View(album);
         }
 

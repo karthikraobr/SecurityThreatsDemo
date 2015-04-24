@@ -40,8 +40,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
+                    Session["Logged"] = model.UserName;
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
