@@ -28,6 +28,10 @@
                     <li><a href="@Url.Content("~/Store/")">Store</a></li>
                     <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                     <li><a href="@Url.Content("~/StoreManager/")">Admin</a></li>
+                    @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Secure")
+                    {
+                        <li><a href="@Url.Content("~/Account/LogOff")">Sign Out</a></li>
+                    }
                    
                 </ul>
             </div>
