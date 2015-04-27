@@ -81,3 +81,4 @@ D:\SecurityDemo\SecurityThreatsDemo\MvcMusicStore-Completed\MvcMusicStore\bin\Sy
 D:\SecurityDemo\SecurityThreatsDemo\MvcMusicStore-Completed\MvcMusicStore\bin\System.Web.WebPages.Razor.xml
 D:\SecurityDemo\SecurityThreatsDemo\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.dll
 D:\SecurityDemo\SecurityThreatsDemo\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.pdb
+D:\SecurityDemo\SecurityThreatsDemo\MvcMusicStore-Completed\MvcMusicStore\obj\Debug\MvcMusicStore.csprojResolveAssemblyReference.cache
