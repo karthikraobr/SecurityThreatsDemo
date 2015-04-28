@@ -43,6 +43,10 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                     MigrateShoppingCart(model.UserName);
                     Session["Logged"] = model.UserName;
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    HttpCookie loggedUser = new HttpCookie("LoggedUsed", model.UserName);
+                    //loggedUser.HttpOnly = true;
+                    //loggedUser.Secure = true;
+                    Response.Cookies.Add(loggedUser);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
