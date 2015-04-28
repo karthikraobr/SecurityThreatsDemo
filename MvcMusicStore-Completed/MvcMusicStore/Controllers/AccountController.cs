@@ -95,8 +95,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
+                    Session["Logged"] = model.UserName;
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
