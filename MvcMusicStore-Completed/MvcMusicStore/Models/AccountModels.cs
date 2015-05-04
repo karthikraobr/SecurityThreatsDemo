@@ -64,4 +64,9 @@ namespace Mvc3ToolsUpdateWeb_Default.Models
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+    public class ArtistViewModel
+    {
+        public int ArtistId { get; set; }
+        public string Name { get; set; }
+    }
 }
