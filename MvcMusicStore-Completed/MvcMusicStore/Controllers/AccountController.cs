@@ -115,10 +115,10 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ChangePassword
-        // [OptionalAuthorize(false)]
-        // [Authorize]
+       //
+       // GET: /Account/ChangePassword
+          [OptionalAuthorize(false)]
+       // [Authorize]
        // [OptionalAuthorize(false)]
         public ActionResult ChangePassword()
         {
@@ -126,8 +126,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         }
 
         //
-        // POST: /Account/ChangePassword
-       // [OptionalAuthorize(false)]
+        ////POST: /Account/ChangePassword
+          [OptionalAuthorize(false)]
         //[Authorize]
         //[OptionalAuthorize(true)]
         [HttpPost]

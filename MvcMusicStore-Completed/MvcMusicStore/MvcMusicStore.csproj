@@ -118,6 +118,7 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MusicStoreEntities.cs" />
+    <Compile Include="Models\OptionalAuthorizeAttribute .cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\AlbumReview.cs" />
     <Compile Include="Models\OrderDetail.cs" />
