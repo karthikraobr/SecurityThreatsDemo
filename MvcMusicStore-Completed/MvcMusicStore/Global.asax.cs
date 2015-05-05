@@ -32,13 +32,19 @@ namespace MvcMusicStore
 
         protected void Application_Start()
         {
-
-
+            //MvcHandler.DisableMvcResponseHeader = true;
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
+
+        //protected void Application_PreSendRequestHeaders()
+        //{
+        //    Response.Headers.Set("Server", "AntiHackerServer");
+        //    Response.Headers.Remove("X-AspNet-Version"); //alternative to above solution
+        //    Response.Headers.Remove("X-AspNetMvc-Version"); //alternative to above solution
+        //}
 
         //protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         //{
@@ -53,6 +59,10 @@ namespace MvcMusicStore
         //            headers.Remove("X-AspNet-Version");
         //            headers.Remove("X-AspNetMvc-Version");
         //            headers.Remove("X-Powered-By");
+        //            headers.Remove("x-content-type-options");
+        //            headers.Remove("Host");
+        //            headers.Remove("Cookie");
+        //            headers.Remove("Origin");
         //        }
         //    }
         //}
