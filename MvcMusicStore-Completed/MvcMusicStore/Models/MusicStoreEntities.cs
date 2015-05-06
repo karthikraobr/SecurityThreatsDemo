@@ -14,6 +14,7 @@ namespace MvcMusicStore.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<AlbumReview> AlbumReview { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
 
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {

@@ -29,9 +29,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         public ActionResult LogOn()
         {
             return View();
-        }
-
-        //
+        }      
+       //
         // POST: /Account/LogOn
 
         [HttpPost]
@@ -43,8 +42,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                 {
                     MigrateShoppingCart(model.UserName);
                     Session["Logged"] = model.UserName;
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    HttpCookie loggedUser = new HttpCookie("LoggedUsed", model.UserName);
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);                   
+                    HttpCookie loggedUser = new HttpCookie("LoggedUsed", model.UserName);                 
                     //loggedUser.HttpOnly = true;
                     //loggedUser.Secure = true;
                     Response.Cookies.Add(loggedUser);
@@ -119,7 +118,6 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
        // GET: /Account/ChangePassword
           [OptionalAuthorize(false)]
        // [Authorize]
-       // [OptionalAuthorize(false)]
         public ActionResult ChangePassword()
         {
             return View();
@@ -129,7 +127,6 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         ////POST: /Account/ChangePassword
           [OptionalAuthorize(false)]
         //[Authorize]
-        //[OptionalAuthorize(true)]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {

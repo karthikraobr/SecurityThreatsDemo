@@ -69,4 +69,12 @@ namespace Mvc3ToolsUpdateWeb_Default.Models
         public int ArtistId { get; set; }
         public string Name { get; set; }
     }
+
+    public class UserDetailsViewModel
+    {
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int PhoneNumber { get; set; }
+    }
 }
