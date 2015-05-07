@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
@@ -27,7 +29,10 @@ namespace MvcMusicStore.Controllers
         {
             var order = new Order();
             TryUpdateModel(order);
-
+             HttpCookie loggedUser = new HttpCookie("CreditCardNumber", "9976766565236712");                 
+            //loggedUser.HttpOnly = true;
+            //loggedUser.Secure = true;
+             Response.Cookies.Add(loggedUser);
             try
             {
                 if (string.Equals(values["PromoCode"], PromoCode,

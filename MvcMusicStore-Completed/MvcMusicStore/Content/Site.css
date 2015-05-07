@@ -48,7 +48,7 @@ background-image: linear-gradient(to right, #FFB24D 0%, #B80000 100%);
 
 #header h1
 {
-	background: url("/content/Images/logo.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: url("../content/Images/logo.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     float: left;
     font-size: 18px;
     left: 5px;
@@ -62,7 +62,7 @@ background-image: linear-gradient(to right, #FFB24D 0%, #B80000 100%);
 }
 
 #promotion {
-    background: url("/content/Images/home-showcase.png") no-repeat scroll 0 0 #fff;
+    background: url("../content/Images/home-showcase.png") no-repeat scroll 0 0 #fff;
     height: 300px;
     margin-bottom: 20px;
     width: 100%;
@@ -436,7 +436,7 @@ tr:hover
 /*-----------------UI-----------------*/
 
 .music_compose_img {
-    background: url("/Content/Images/mpng.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("../Content/Images/mpng.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     float: left;
     height: 71px;
     left: 30%;
