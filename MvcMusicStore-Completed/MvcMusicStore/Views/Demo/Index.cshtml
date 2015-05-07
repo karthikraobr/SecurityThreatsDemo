@@ -6,6 +6,7 @@
 
 <h2>This is secure page</h2>
 <script type="text/javascript">
+    var count=0;
     function load1() {
         var URL = "/Demo/UserData";
         $.ajax({
@@ -14,15 +15,16 @@
             url: URL,
             data: {         
                 FirstName: "sai",
-                LastName: "ram"
-                //PhoneNo:9964590205
-                //UserName: "sai",
-                //IsPrimary: true
+                LastName: "ram"               
             },
-            success: function () { alert('Success'); },
+            success: function () {
+                count++; alert("Attacker submit Form in DB "+count+" times");
+                if (count >= 10)
+                    clearInterval(myVar);
+            },
             // error: errorFunc
         });}
-        var myVar = setInterval(function () { load1() }, 10000);
+    var myVar = setInterval(function () { load1() }, 10000);
 </script>
         <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript">
         </script>

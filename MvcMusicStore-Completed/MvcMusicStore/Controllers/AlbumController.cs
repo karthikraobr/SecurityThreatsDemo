@@ -15,7 +15,8 @@ namespace MvcMusicStore.Controllers
         {
             return View(storeDB.Artists.ToList());
         }
-        [OptionalAuthorize(true)]
+       // [OptionalAuthorize(true)]
+        //[Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             var album = storeDB.Artists.Find(id);
