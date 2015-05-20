@@ -39,7 +39,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult Details(int id)
         {
             var album = storeDB.Albums.Find(id);
-
+            //throw new ApplicationException("Testing default ErrorHandler attribute");
             return View(album);
         }
 

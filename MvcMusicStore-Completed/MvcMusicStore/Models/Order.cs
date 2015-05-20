@@ -59,6 +59,10 @@ namespace MvcMusicStore.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Credit Card Numbrer is required")]
+        [StringLength(24)]
+        public string CreditCardNumber { get; set; }
+
         [ScaffoldColumn(false)]
         public decimal Total { get; set; }
 

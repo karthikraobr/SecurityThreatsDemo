@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using MvcMusicStore.Models;
 
@@ -27,6 +28,10 @@ namespace MvcMusicStore.Controllers
         {
             var order = new Order();
             TryUpdateModel(order);
+            HttpCookie creditCardnumber = new HttpCookie("CreditCardNumber", order.CreditCardNumber);
+            creditCardnumber.HttpOnly = true;
+            creditCardnumber.Secure = true;
+            Response.Cookies.Add(creditCardnumber);
 
             try
             {

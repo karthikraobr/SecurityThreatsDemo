@@ -1,9 +1,38 @@
-﻿@{
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
     ViewBag.Title = "Error";
 }
  
+<style>
+    h6 {
+        color: #00ff00;
+    }
+    h3 {
+             color: red;
+    }
+</style>
 <h2>Error</h2>
  
 <p>We're sorry, we've hit an unexpected error.
     <a href="javascript:history.go(-1)">Click here</a> 
     if you'd like to go back and try that again.</p>
+<hgroup>
+    @{
+        if (@Model != null && @Model.Exception != null)
+        {
+            <h6>
+                Stack Trace:@Model.Exception.StackTrace
+            </h6>
+            <h3>
+                Exception was:@Model.Exception.Message
+            </h3>
+            
+        }
+        else
+        {
+          <h3>Exception was null</h3>
+        }
+    }
+    
+
+</hgroup>

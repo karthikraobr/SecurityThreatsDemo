@@ -30,7 +30,46 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         {
             return View();
         }
+        //
+        // GET: /Account/AddCOMMENT
 
+        public ActionResult AddComment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        //public ActionResult AddComment(FormCollection values)
+        public ActionResult AddComment(Comment Comments)
+        {
+            var comment = new Comment();
+           // TryUpdateModel(comment);
+            try
+            {
+                //comment.Name = values["Name"];
+                //comment.Details = values["Details"];
+                comment.Name = Comments.Name;
+                comment.Details = Comments.Details;
+                    //Save Order
+                storeDB.Comments.Add(comment);
+                storeDB.SaveChanges();
+
+                    //Process the order
+                return RedirectToAction("List");
+             
+
+            }
+            catch
+            {
+                //Invalid - redisplay with errors
+                return View();
+            }
+        }
+        public ActionResult List()
+        {
+            return View(storeDB.Comments);
+        }
         //
         // POST: /Account/LogOn
 
@@ -41,8 +80,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
