@@ -35,7 +35,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
         public ActionResult AddComment()
         {
-            return View();
+            return View(new Comment());
         }
 
         [HttpPost]

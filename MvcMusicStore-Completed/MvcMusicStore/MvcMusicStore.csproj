@@ -107,18 +107,12 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
-    <Compile Include="Controllers\UserCommentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ImageHandler.ashx.cs">
-      <DependentUpon>ImageHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -132,7 +126,6 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\SampleData.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="Models\UserComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
@@ -275,19 +268,16 @@
     <Content Include="Views\Account\AttackerChangeEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ImageHandler.ashx" />
+    <Content Include="Views\UserComment\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserComment\ThankYouPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserComment\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserComment\ThankYouPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
