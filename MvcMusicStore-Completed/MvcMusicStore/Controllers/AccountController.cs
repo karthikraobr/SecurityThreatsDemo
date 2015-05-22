@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using CaptchaMvc.HtmlHelpers;
 using Mvc3ToolsUpdateWeb_Default.Models;
 using MvcMusicStore.Models;
 
@@ -35,6 +36,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
         public ActionResult AddComment()
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             return View(new Comment());
         }
 
@@ -47,8 +50,6 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
            // TryUpdateModel(comment);
             try
             {
-                //comment.Name = values["Name"];
-                //comment.Details = values["Details"];
                 comment.Name = Comments.Name;
                 comment.Details = Comments.Details;
                     //Save Order
@@ -70,6 +71,30 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         {
             return View(storeDB.Comments);
         }
+
+        public ActionResult AddUserComment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddUserComment(string empty)
+        {
+            // Code for validating the CAPTCHA  
+            if (this.IsCaptchaValid("Captcha is not valid"))
+            {
+
+                return RedirectToAction("ThankYouPage");
+            }
+
+            ViewBag.ErrMessage = "Error: captcha is not valid.";
+            return View();
+        }
+
+        public ActionResult ThankYouPage()
+        {
+            return View();
+        }   
         //
         // POST: /Account/LogOn
 
@@ -80,6 +105,10 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
+                    string guid = Guid.NewGuid().ToString();
+                    Session["AuthToken"] = guid;
+                    // now create a new cookie with this guid value  
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid)); 
                     MigrateShoppingCart(model.UserName);
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -102,15 +131,36 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/LogOff
-
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
 
+            if (Request.Cookies["ASP.NET_SessionId"] != null)
+            {
+                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
+                Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-20);
+            }
+
+            if (Request.Cookies["AuthToken"] != null)
+            {
+                Response.Cookies["AuthToken"].Value = string.Empty;
+                Response.Cookies["AuthToken"].Expires = DateTime.Now.AddMonths(-20);
+            }
             return RedirectToAction("Index", "Home");
         }
+
+        //
+        // GET: /Account/LogOff
+
+        //public ActionResult LogOff()
+        //{
+        //    FormsAuthentication.SignOut();
+
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         //
         // GET: /Account/Register

@@ -17,6 +17,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult AddressAndPayment()
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             return View();
         }
 

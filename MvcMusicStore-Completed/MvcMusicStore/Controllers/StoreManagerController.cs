@@ -37,6 +37,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Create()
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
             ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
             return View();
@@ -65,6 +67,8 @@ namespace MvcMusicStore.Controllers
  
         public ActionResult Edit(int id)
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             Album album = db.Albums.Find(id);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
             ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);

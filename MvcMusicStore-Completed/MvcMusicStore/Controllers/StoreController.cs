@@ -16,6 +16,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Index()
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             var genres = storeDB.Genres.ToList();
 
             return View(genres);
@@ -26,6 +28,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Browse(string genre)
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             // Retrieve Genre and its Associated Albums from database
             var genreModel = storeDB.Genres.Include("Albums")
                 .Single(g => g.Name == genre);

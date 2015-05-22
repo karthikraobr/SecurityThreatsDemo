@@ -14,6 +14,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Index()
         {
+            if (Session["Logged"] == null && Request.Cookies["AuthToken"] == null)
+                return RedirectToAction("LogOn", "Account");
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
             // Set up our ViewModel
