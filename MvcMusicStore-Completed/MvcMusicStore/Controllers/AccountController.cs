@@ -272,9 +272,13 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         }
         //
         // GET: /Account/BruteForceAttacks
-        public ActionResult BruteForceAttacks()
+        public ActionResult BruteForceAttacks(UserCredentialDetails userCredential)
         {
-            
+          //var pass = storeDB.UserCredentialDetails.Select();
+
+            var password= (from h in storeDB.UserCredentialDetails
+            where h.UserName.Equals(userCredential.UserName)
+            select h.Password).SingleOrDefault();
             var timeStarted = DateTime.Now;
           //  Console.WriteLine("Start BruteForce - {0}", timeStarted.ToString());
 
@@ -289,7 +293,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                 /* The estimated length of the password will be increased and every possible key for this
                  * key length will be created and compared against the password */
                 estimatedPasswordLength++;
-                startBruteForce(estimatedPasswordLength);
+                startBruteForce(estimatedPasswordLength, password.ToString());
             }
             ViewBag.result = result;
             ViewBag.TimeTaken =Convert.ToString(DateTime.Now.Subtract(timeStarted).TotalSeconds);
@@ -307,12 +311,13 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         /// Starts the recursive method which will create the keys via brute force
         /// </summary>
         /// <param name="keyLength">The length of the key</param>
-        private static void startBruteForce(int keyLength)
+        private static void startBruteForce(int keyLength,string password)
         {
+            string pass = password;
             var keyChars = createCharArray(keyLength, charactersToTest[0]);
             // The index of the last character will be stored for slight perfomance improvement
             var indexOfLastChar = keyLength - 1;
-            createNewKey(0, keyChars, keyLength, indexOfLastChar);
+            createNewKey(0, keyChars, keyLength, indexOfLastChar, pass);
         }
 
         /// <summary>
@@ -334,8 +339,9 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         /// <param name="keyChars">The current key represented as char array</param>
         /// <param name="keyLength">The length of the key</param>
         /// <param name="indexOfLastChar">The index of the last character of the key</param>
-        private static void createNewKey(int currentCharPosition, char[] keyChars, int keyLength, int indexOfLastChar)
+        private static void createNewKey(int currentCharPosition, char[] keyChars, int keyLength, int indexOfLastChar,string pass)
         {
+            string password = pass;
             var nextCharPosition = currentCharPosition + 1;
             // We are looping trough the full length of our charactersToTest array
             for (int i = 0; i < charactersToTestLength; i++)
@@ -347,7 +353,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                 // The method calls itself recursively until all positions of the key char array have been replaced
                 if (currentCharPosition < indexOfLastChar)
                 {
-                    createNewKey(nextCharPosition, keyChars, keyLength, indexOfLastChar);
+                    createNewKey(nextCharPosition, keyChars, keyLength, indexOfLastChar, password);
                 }
                 else
                 {
@@ -356,6 +362,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
                     /* The char array will be converted to a string and compared to the password. If the password
                      * is matched the loop breaks and the password is stored as result. */
+                    
                     if ((new String(keyChars)) == password)
                     {
                         if (!isMatched)

@@ -32,7 +32,7 @@ namespace MvcMusicStore.Controllers
             DataTable dt = new DataTable();
             string connString = storeDB.Database.Connection.ConnectionString;
            // string query = string.Format("select * from [Album] where Title like '%{0}'", searchStr);
-            string query = "select * from [Album] where Title like @TitleName+'%' ";
+            string query = "select * from [Albums] where Title like @TitleName+'%' ";
             string str = searchStr.Substring(0, 3);
             try
             {             

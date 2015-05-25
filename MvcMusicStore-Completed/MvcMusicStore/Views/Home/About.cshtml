@@ -1,0 +1,26 @@
+﻿@model MvcMusicStore.Models.UserCredentialDetails
+@{
+    ViewBag.Title = "About Us";
+    Layout = null;
+}
+
+@using (Html.BeginForm("BruteForceAttacks","Account"))
+{
+    <div class="aboutDialog">
+        <fieldset>
+            <legend>Get Magic Password</legend>
+
+            <div>
+                @Html.LabelFor(m => m.UserName)
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </fieldset>
+    </div>
+}
+@*<p><a href="javascript:void(0);">Close this Window</a></p>*@

@@ -11,6 +11,7 @@ namespace MvcMusicStore.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<UserComment> UserComments { get; set; } 
+        public DbSet<UserComment> UserComments { get; set; }
+        public DbSet<UserCredentialDetails> UserCredentialDetails { get; set; }
     }
 }
