@@ -152,16 +152,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/LogOff
-
-        //public ActionResult LogOff()
-        //{
-        //    FormsAuthentication.SignOut();
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
+        
         //
         // GET: /Account/Register
 
@@ -201,7 +192,6 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
        //
        // GET: /Account/ChangePassword
-       // [OptionalAuthorize(false)]
        // [Authorize]
         [OptionalAuthorize(false)]
         public ActionResult ChangePassword()
@@ -211,9 +201,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
         //
         // POST: /Account/ChangePassword
-        [OptionalAuthorize(false)]
         //[Authorize]
-        // [OptionalAuthorize(true)]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
@@ -255,9 +243,17 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         }
 
         //
-        // POST: /Account/AttackerChangeEmail
+        // GET: /Account/ChangeArtistName
+        public ActionResult ChangeArtistName()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ChangeArtistName
         [HttpPost]
-        public ActionResult AttackerChangeEmail(ArtistViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeArtistName(ArtistViewModel model)
         {
             var artist = new Artist();
             //  TryUpdateModel(artist);
@@ -266,36 +262,6 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             //order.OrderDate = DateTime.Now;
             var original = storeDB.Artists.Find(18);
             //Save Order
-            //original.ArtistId = 138;
-            original.Name = model.Name;
-            storeDB.Artists.Attach(original);
-            var entry = storeDB.Entry(original);
-            entry.Property(e => e.Name).IsModified = true;
-            // other changed properties
-            storeDB.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
-      
-        //
-        // GET: /Account/ChangeUserEmail
-        public ActionResult ChangeUserEmail()
-        {
-            return View();
-        }
-        //
-        // POST: /Account/ChangeUserEmail
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangeUserEmail(ArtistViewModel model)
-        {
-            var artist = new Artist();
-            //  TryUpdateModel(artist);
-            artist.Name = model.Name;
-            artist.ArtistId = 1;
-            //order.OrderDate = DateTime.Now;
-            var original = storeDB.Artists.Find(138);
-            //Save Order
-            //original.ArtistId = 138;
             original.Name = model.Name;
             storeDB.Artists.Attach(original);
             var entry = storeDB.Entry(original);
