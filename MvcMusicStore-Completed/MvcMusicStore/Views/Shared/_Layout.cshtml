@@ -25,7 +25,18 @@
                 @Html.ActionLink("Log Out","LogOff","Account")
 
             }
-        </ul>        
+        </ul>    
+
+        <div id="search">
+            <form action="@Url.Action("Search", "Store")">
+                <input type="text" name="searchStr" style="height: 16px;" />
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        @*@if (User.Identity.Name != "")
+        {
+            <h3 style="float: right">Welcome : @User.Identity.Name</h3>
+        }*@    
     </div>
 
     @{Html.RenderAction("GenreMenu", "Store");}

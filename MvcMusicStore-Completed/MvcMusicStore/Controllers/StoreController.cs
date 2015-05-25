@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +23,38 @@ namespace MvcMusicStore.Controllers
             var genres = storeDB.Genres.ToList();
 
             return View(genres);
+        }
+
+        //
+        // GET: /Store/Browse?genre=Disco
+        public ActionResult Search(string searchStr)
+        {
+            DataTable dt = new DataTable();
+            string connString = storeDB.Database.Connection.ConnectionString;
+           // string query = string.Format("select * from [Album] where Title like '%{0}'", searchStr);
+            string query = "select * from [Album] where Title like @TitleName+'%' ";
+            string str = searchStr.Substring(0, 3);
+            try
+            {             
+                using (SqlConnection connection = new SqlConnection(connString))
+                {
+                    connection.Open();
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.Add(new SqlParameter("TitleName", str));
+                    // SqlDataAdapter da = cmd.ExecuteReader();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    connection.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            ViewBag.Data = dt;
+            return View();
         }
 
         //

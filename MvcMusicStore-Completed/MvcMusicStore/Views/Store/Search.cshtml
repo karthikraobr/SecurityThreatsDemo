@@ -1,0 +1,40 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "Search Albums";
+}
+
+<div class="genre">
+
+
+    @*<ul id="album-list">
+            @foreach (var album in ViewBag.Albums)
+            {
+                <li>
+                    <a href="@Url.Action("Details", new { id = album.AlbumId })">
+                        <img alt="@album.Title" src="@album.AlbumArtUrl" />
+                        <span>@album.Title</span>
+                    </a>
+                </li>
+            }
+        </ul>*@
+    <ul id="album-list">
+        @{
+            DataTable dt = ViewBag.Data;
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    <li>
+                        <a href="@Url.Action("Details", new {id = row["AlbumId"]})">
+                            <img alt='@row["Title"]' src='@row["AlbumArtUrl"]' />
+                            <span>@row["Title"]</span>
+                        </a>
+
+                    </li>
+                }
+            }
+        }
+    </ul>
+</div>
+@*<a href="~/App_Data/UserData.xml">~/App_Data/UserData.xml</a>*@
+
