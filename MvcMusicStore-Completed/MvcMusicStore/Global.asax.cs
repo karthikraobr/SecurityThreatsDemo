@@ -31,6 +31,7 @@ namespace MvcMusicStore
 
         protected void Application_Start()
         {
+            MvcHandler.DisableMvcResponseHeader = true; 
             System.Data.Entity.Database.SetInitializer(new MvcMusicStore.Models.SampleData());
 
             AreaRegistration.RegisterAllAreas();
@@ -38,5 +39,15 @@ namespace MvcMusicStore
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
+        protected void Application_PreSendRequestHeaders()
+        {
+            //Response.Headers.Remove("Server");
+            Response.Headers.Set("Server", "AntiHackerServer");
+            Response.Headers.Remove("X-AspNet-Version"); //alternative to above solution
+            Response.Headers.Remove("X-AspNetMvc-Version"); //alternative to above solution
+            Response.Headers.Set("X-Powered-By","Java"); //alternative to above solution
+            Response.Headers.Set("X-SourceFiles","HackerProof");
+        }
+
     }
 }
