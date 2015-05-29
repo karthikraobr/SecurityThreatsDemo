@@ -1,7 +1,32 @@
 ﻿
+@model IEnumerable<MvcMusicStore.Models.Comment>
+
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "CommentList";
 }
 
-<h2>List</h2>
+<h2>List of All Comments</h2>
 
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Message
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.Raw(item.Details)
+            </td>
+        </tr>
+    }
+</table>
