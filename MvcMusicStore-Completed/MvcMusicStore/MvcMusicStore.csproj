@@ -118,6 +118,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MusicStoreEntities.cs" />
     <Compile Include="Models\OptionalAuthorizeAttribute .cs" />
@@ -285,6 +286,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Album\Export.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\AddComment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

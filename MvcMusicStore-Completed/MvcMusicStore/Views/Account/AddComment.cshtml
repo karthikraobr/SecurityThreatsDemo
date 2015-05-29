@@ -1,0 +1,35 @@
+﻿@model MvcMusicStore.Models.Comment
+
+@{
+    ViewBag.Title = "AddComment";
+}
+
+<h2>Add new comment</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Comment</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Details)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Details)
+            @Html.ValidationMessageFor(model => model.Details)
+        </div>
+
+        <p>
+            <input type="submit" value="Add NEW Comment" />
+        </p>
+    </fieldset>
+}
+
