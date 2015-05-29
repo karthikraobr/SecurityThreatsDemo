@@ -1,0 +1,24 @@
+﻿@using MvcMusicStore.Models
+@model IEnumerable<MvcMusicStore.Models.Artist>
+@{
+    ViewBag.Title = "Export";
+}
+<!DOCTYPE html>
+<h2>All Employee Details</h2>
+@foreach (Artist artist in @Model)
+{
+    <table style="border-collapse: collapse;" border="1">
+        <tbody>
+            <tr>
+                <td>
+                    @artist.ArtistId
+                </td>
+                <td>
+                    @artist.Name
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+

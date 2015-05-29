@@ -9,7 +9,8 @@
         @grid.GetHtml(htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
                           grid.Column("ArtistId"),
         grid.Column("Name"),  
-        grid.Column("", header: "Edit", format: @<text>@Html.ActionLink("Edit", "Edit", "Album", new { id = item.ArtistId }, new { target = "_blank" })</text>)
+        grid.Column("", header: "Edit", format: @<text>@Html.ActionLink("Edit", "Edit", "Album", new { id = item.ArtistId }, new { target = "_blank" })</text>),
+            grid.Column("",header:"Export",format:@<text>@Html.ActionLink("Export","Export","Album")</text>)
         ));
     }
 

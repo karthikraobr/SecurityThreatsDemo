@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
@@ -21,6 +24,28 @@ namespace MvcMusicStore.Controllers
         {
             var album = storeDB.Artists.Find(id);
             return View(album);
+        }
+
+        public ActionResult Export()
+        {
+            var exportList = storeDB.Artists.ToList();
+            GridView gv=new GridView();
+            gv.DataSource = storeDB.Artists.ToList();
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment ; filename = Book1.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw=new StringWriter();
+            HtmlTextWriter htw=new HtmlTextWriter(sw);
+            gv.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+            return RedirectToAction("StudentDetails");
+          //  return View(exportList);
+           //  return new RazorPDF.PdfResult(exportList, "Export");
         }
         [HttpPost]
         public ActionResult Edit(Artist Albums)
