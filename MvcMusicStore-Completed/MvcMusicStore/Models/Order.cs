@@ -46,6 +46,8 @@ namespace MvcMusicStore.Models
 
         public string Email { get; set; }
 
+        public string CreditCardNumber { get; set; }
+
         [ScaffoldColumn(false)]
         public decimal Total { get; set; }
 
