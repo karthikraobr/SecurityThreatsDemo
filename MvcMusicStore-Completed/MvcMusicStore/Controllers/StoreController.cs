@@ -25,7 +25,7 @@ namespace MvcMusicStore.Controllers
             return View(genres);
         }
 
-        //
+        //SQL injection
         // GET: /Store/Browse?genre=Disco
         public ActionResult Search(string searchStr)
         {

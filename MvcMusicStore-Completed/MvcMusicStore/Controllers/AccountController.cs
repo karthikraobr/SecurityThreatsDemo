@@ -32,7 +32,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         {
             return View();
         }
-        //
+        //CSRF Test
         // GET: /Account/AddCOMMENT
 
         public ActionResult AddComment()
@@ -42,8 +42,9 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(new Comment());
         }
 
-       
-        [HttpPost, ValidateInput(enableValidation:false)]
+        //CSRF Test
+        // Post: /Account/AddCOMMENT
+        [HttpPost, ValidateInput(enableValidation: false)]
         [ValidateAntiForgeryToken]
         public ActionResult AddComment(Comment Comments)
         {
@@ -52,14 +53,14 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             {
                 comment.Details = Sanitizer.GetSafeHtml(Comments.Details); // CSRF (Cross-Site Scripting) Attack protection
                 comment.Name = Comments.Name;
-              //  comment.Details = Comments.Details;
-                    //Save Order
+                //  comment.Details = Comments.Details;
+                //Save Order
                 storeDB.Comments.Add(comment);
                 storeDB.SaveChanges();
 
-                    //Process the order
+                //Process the order
                 return RedirectToAction("List");
-             
+
 
             }
             catch
@@ -68,16 +69,23 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                 return View();
             }
         }
+
+        //CSRF Test
+        //CSRF GRID List
         public ActionResult List()
         {
             return View(storeDB.Comments);
         }
 
+        //CAPTCHA Test
+        // GET: /Account/AddUserComment
         public ActionResult AddUserComment()
         {
             return View();
         }
 
+        //CAPTCHA Test
+        //POST: /Account/AddUserComment
         [HttpPost]
         public ActionResult AddUserComment(string empty)
         {
@@ -95,10 +103,10 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         public ActionResult ThankYouPage()
         {
             return View();
-        }   
+        }
+
         //
         // POST: /Account/LogOn
-
         [HttpPost]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
@@ -109,7 +117,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                     string guid = Guid.NewGuid().ToString();
                     Session["AuthToken"] = guid;
                     // now create a new cookie with this guid value  
-                    Response.Cookies.Add(new HttpCookie("AuthToken", guid)); 
+                    Response.Cookies.Add(new HttpCookie("AuthToken", guid));
                     MigrateShoppingCart(model.UserName);
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
@@ -132,6 +140,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(model);
         }
 
+        //Logoff
+        // 
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -153,7 +163,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
         //
         // GET: /Account/Register
 
@@ -176,8 +186,8 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    MigrateShoppingCart(model.UserName); 
-                    
+                    MigrateShoppingCart(model.UserName);
+
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
@@ -191,9 +201,9 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(model);
         }
 
-       //
-       // GET: /Account/ChangePassword
-       // [Authorize]
+        //
+        // GET: /Account/ChangePassword
+        // [Authorize]
         [OptionalAuthorize(false)]
         public ActionResult ChangePassword()
         {
@@ -275,13 +285,13 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         // GET: /Account/BruteForceAttacks
         public ActionResult BruteForceAttacks(UserCredentialDetails userCredential)
         {
-          //var pass = storeDB.UserCredentialDetails.Select();
+            //var pass = storeDB.UserCredentialDetails.Select();
 
-            var password= (from h in storeDB.UserCredentialDetails
-            where h.UserName.Equals(userCredential.UserName)
-            select h.Password).SingleOrDefault();
+            var password = (from h in storeDB.UserCredentialDetails
+                            where h.UserName.Equals(userCredential.UserName)
+                            select h.Password).SingleOrDefault();
             var timeStarted = DateTime.Now;
-          //  Console.WriteLine("Start BruteForce - {0}", timeStarted.ToString());
+            //  Console.WriteLine("Start BruteForce - {0}", timeStarted.ToString());
 
             // The length of the array is stored permanently during runtime
             charactersToTestLength = charactersToTest.Length;
@@ -297,13 +307,13 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
                 startBruteForce(estimatedPasswordLength, password.ToString());
             }
             ViewBag.result = result;
-            ViewBag.TimeTaken =Convert.ToString(DateTime.Now.Subtract(timeStarted).TotalSeconds);
+            ViewBag.TimeTaken = Convert.ToString(DateTime.Now.Subtract(timeStarted).TotalSeconds);
             //System.Diagnostics.Debug.WriteLine("Password matched. - {0}", DateTime.Now.ToString());
             //System.Diagnostics.Debug.WriteLine("Time passed: {0}s", DateTime.Now.Subtract(timeStarted).TotalSeconds);
             //System.Diagnostics.Debug.WriteLine("Resolved password: {0}", result);
             //System.Diagnostics.Debug.WriteLine("Computed keys: {0}", computedKeys);
 
-           // Console.ReadLine();
+            // Console.ReadLine();
             return View();
         }
         #region Password Generate methods
@@ -312,7 +322,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         /// Starts the recursive method which will create the keys via brute force
         /// </summary>
         /// <param name="keyLength">The length of the key</param>
-        private static void startBruteForce(int keyLength,string password)
+        private static void startBruteForce(int keyLength, string password)
         {
             string pass = password;
             var keyChars = createCharArray(keyLength, charactersToTest[0]);
@@ -340,7 +350,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         /// <param name="keyChars">The current key represented as char array</param>
         /// <param name="keyLength">The length of the key</param>
         /// <param name="indexOfLastChar">The index of the last character of the key</param>
-        private static void createNewKey(int currentCharPosition, char[] keyChars, int keyLength, int indexOfLastChar,string pass)
+        private static void createNewKey(int currentCharPosition, char[] keyChars, int keyLength, int indexOfLastChar, string pass)
         {
             string password = pass;
             var nextCharPosition = currentCharPosition + 1;
@@ -363,7 +373,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
 
                     /* The char array will be converted to a string and compared to the password. If the password
                      * is matched the loop breaks and the password is stored as result. */
-                    
+
                     if ((new String(keyChars)) == password)
                     {
                         if (!isMatched)
@@ -385,7 +395,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         private static string password = "5434";
         private static string result;
 
-       
+
 
         /* The length of the charactersToTest Array is stored in a
          * additional variable to increase performance  */
