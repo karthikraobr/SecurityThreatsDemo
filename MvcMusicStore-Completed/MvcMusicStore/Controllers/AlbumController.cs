@@ -14,6 +14,7 @@ namespace MvcMusicStore.Controllers
     {
         MusicStoreEntities storeDB = new MusicStoreEntities();
         // GET: Album
+        [Authorize(Roles = "user")]
         public ActionResult Index()
         {
             return View(storeDB.Artists.ToList());
@@ -28,7 +29,7 @@ namespace MvcMusicStore.Controllers
 
         //
         // GET: /Album/Export
-        [Authorize(Roles = "user")]
+        //[Authorize(Roles = "user")]
         public ActionResult Export()
         {
             var exportList = storeDB.Artists.ToList();
