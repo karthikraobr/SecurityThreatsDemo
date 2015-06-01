@@ -8,10 +8,8 @@
 
 @using (Html.BeginForm())
 {
-
-    @*@Html.AntiForgeryToken()*@
-
-    @*@Html.ValidationSummary(true)*@
+   @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
     <fieldset>
         <legend>Comment</legend>
 

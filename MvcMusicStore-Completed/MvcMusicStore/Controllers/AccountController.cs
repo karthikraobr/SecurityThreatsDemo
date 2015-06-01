@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using CaptchaMvc.HtmlHelpers;
+using Microsoft.Security.Application;
 using Mvc3ToolsUpdateWeb_Default.Models;
 using MvcMusicStore.Models;
 
@@ -41,17 +42,17 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             return View(new Comment());
         }
 
-        [HttpPost]
-        [ValidateInput(false)]
-        //public ActionResult AddComment(FormCollection values)
+       
+        [HttpPost, ValidateInput(enableValidation:false)]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComment(Comment Comments)
         {
             var comment = new Comment();
-           // TryUpdateModel(comment);
             try
             {
+                comment.Details = Sanitizer.GetSafeHtml(Comments.Details); // CSRF (Cross-Site Scripting) Attack protection
                 comment.Name = Comments.Name;
-                comment.Details = Comments.Details;
+              //  comment.Details = Comments.Details;
                     //Save Order
                 storeDB.Comments.Add(comment);
                 storeDB.SaveChanges();
