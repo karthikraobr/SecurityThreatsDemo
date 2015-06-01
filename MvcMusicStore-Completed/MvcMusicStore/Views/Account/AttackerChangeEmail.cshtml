@@ -8,7 +8,7 @@
 <script type="text/javascript">
    document.attackform.submit();
 </script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("ChangeUserEmail","Account"))
 {
     @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
     <div>

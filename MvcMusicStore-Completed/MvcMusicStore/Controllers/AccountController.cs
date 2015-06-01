@@ -222,7 +222,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         //
         // POST: /Account/AttackerChangeEmail
         [HttpPost]
-        public ActionResult AttackerChangeEmail(ArtistViewModel model)
+        public ActionResult AttackerChangeArtistName(ArtistViewModel model)
         {
             var artist = new Artist();
             //  TryUpdateModel(artist);
@@ -247,10 +247,11 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
         {
             return View();
         }
+
         //
         // POST: /Account/ChangeUserEmail
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public ActionResult ChangeUserEmail(ArtistViewModel model)
         {
             var artist = new Artist();
@@ -258,7 +259,7 @@ namespace Mvc3ToolsUpdateWeb_Default.Controllers
             artist.Name = model.Name;
             artist.ArtistId = 1;
             //order.OrderDate = DateTime.Now;
-            var original = storeDB.Artists.Find(138);
+            var original = storeDB.Artists.Find(18);
             //Save Order
             //original.ArtistId = 138;
             original.Name = model.Name;

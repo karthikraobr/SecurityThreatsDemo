@@ -19,13 +19,16 @@ namespace MvcMusicStore.Controllers
             return View(storeDB.Artists.ToList());
         }
        // [OptionalAuthorize(true)]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             var album = storeDB.Artists.Find(id);
             return View(album);
         }
 
+        //
+        // GET: /Album/Export
+        [Authorize(Roles = "user")]
         public ActionResult Export()
         {
             var exportList = storeDB.Artists.ToList();
@@ -43,10 +46,11 @@ namespace MvcMusicStore.Controllers
             Response.Output.Write(sw.ToString());
             Response.Flush();
             Response.End();
-            return RedirectToAction("StudentDetails");
-          //  return View(exportList);
-           //  return new RazorPDF.PdfResult(exportList, "Export");
+            return RedirectToAction("Index");
         }
+
+        //
+        // Post: /Album/Edit
         [HttpPost]
         public ActionResult Edit(Artist Albums)
         {
